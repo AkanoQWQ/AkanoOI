@@ -6,10 +6,6 @@ Akano的个人OI仓库
 
 别问,问就是蒟蒻⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄.  
 人是真的菜......  
-**个人网站(重新上线):** [autoAC](http://www.autoac.top/)   
-**个人库(AL)及本地评测(PEOJ)下载:**[下载链接](http://www.autoac.top/index.php/al_and_peoj/)   
-
-![练习情况](https://api.jerryz.com.cn/practice?id=369942&dark_mode=true)
 
 ![练习情况](https://cfrating.baoshuo.dev/rating?username=ShiTieBi)
 
