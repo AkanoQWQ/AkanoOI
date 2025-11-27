@@ -1,0 +1,12 @@
+#include<stdlib.h>
+using namespace std;
+int main(){
+	
+	system("taskkill /im Ã¨²¡¶¾.exe /f");
+	system("taskkill /im \"¼ÎÈ»µÄCSP-S 2022 ÓÎ¼Ç.exe\" /f");
+	system("taskkill /im *Ã¨*²¡*¶¾*.exe /f");
+	system("taskkill /im *¼Î*È»*.exe /f");
+	system("taskkill /im Ã¨* /f");
+	return 0;
+}
+

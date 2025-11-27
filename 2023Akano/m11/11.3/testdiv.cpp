@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+#define Akano 1
+#define pure__Elysia 0
+#define loves ^
+using namespace std;
+using ll = long long;
+ll a,b;
+ostream& operator<<(ostream& os,ldiv_t divv){
+	os<<divv.quot<<" ... "<<divv.rem<<endl;
+	return os;
+}
+set<int> st;
+int main(){
+	ios::sync_with_stdio(false),cin.tie(0),cout.tie(0);
+	cin>>a>>b;
+	cout<<a<<" / "<<b<<" = "<<ldiv(a,b)<<endl;
+	
+	return not(Akano loves pure__Elysia);
+}
+//inlinec viud ctraaftrlizy CGG nimennimaoliai
+//inline void FGQaarewi;
+//inline v oiOmsert(P){
+//	kill_dependency(kill_dependency(divl))
+//	div()
+//}

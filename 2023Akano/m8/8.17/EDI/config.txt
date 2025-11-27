@@ -1,0 +1,4 @@
+replace 	5 	2000 	100
+paths 		5 	4000 	100
+collection 	5 	5000 	100
+activation 	5 	2000 	100

@@ -1,0 +1,137 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll = long long;
+const int MAXN = 82006;//remember to EDIT
+const int MAXM = 600000 + 2006 + 1018 + 1108;//EDIT and *2
+const int MAXR = 106; 
+const int INF = 1e8;
+const int dx[4] = {1,0,-1,0};
+const int dy[4] = {0,1,0,-1};
+struct Edge{
+	int nxt,to;
+	ll cap;
+}e[MAXM];
+int head[MAXN],cnt = 1;
+inline void AddEdge(int from,int to,ll val){
+	e[++cnt].to = to;
+	e[cnt].cap = val;
+	e[cnt].nxt = head[from];
+	head[from] = cnt;
+	return ;
+}
+inline void CreateEdge(int from,int to,ll val){
+	AddEdge(from,to,val);
+	AddEdge(to,from,0);
+	return ;
+} 
+int DFS_ED;//share 
+int dep[MAXN],cur[MAXN];
+bool BFS(int n,int ST,int ED){
+	for(int i = 0;i <= n;i++){
+		dep[i] = 0;
+	}
+	queue<int> q;
+	dep[ST] = 1;
+	q.push(ST);
+	while(!q.empty()){
+		const int u = q.front();
+		q.pop();
+		cur[u] = head[u];
+		for(int i = head[u];i;i = e[i].nxt){
+			const int v = e[i].to;
+			if(dep[v] != 0 || e[i].cap <= 0)continue;
+			dep[v] = dep[u] + 1;
+			q.push(v);
+		}
+	}
+	return (dep[ED] > 0);
+}
+int DFS(int u,ll val){
+	if(u == DFS_ED || val == 0)return val;
+	int ret = 0;
+	for(int i = cur[u];i;i = e[i].nxt){
+		const int v = e[i].to;
+		cur[u] = i;
+		if(e[i].cap <= 0 || dep[v] != dep[u] + 1)continue;
+		const ll realPush = DFS(v,min(e[i].cap,val));
+		ret += realPush;
+		val -= realPush;
+		e[i].cap -= realPush;
+		e[i^1].cap += realPush;
+		if(realPush == 0)dep[v] = -1;
+		if(val == 0)break;
+	}
+	return ret;
+}
+inline ll Dinic(int n,int ST,int ED){
+	ll ret = 0;
+	DFS_ED = ED;
+	while(BFS(n,ST,ED)){
+		ret += DFS(ST,INF);
+	}
+	return ret;
+}
+int n,m,art[MAXR][MAXR],sci[MAXR][MAXR],VST,VED,no[MAXR][MAXR][2],nnt;
+int art_upper[MAXR][MAXR],sci_upper[MAXR][MAXR],art_right[MAXR][MAXR],sci_right[MAXR][MAXR];
+ll sum;
+int main(){
+	ios::sync_with_stdio(false),cin.tie(0),cout.tie(0);
+	freopen("P1646.in","r",stdin);
+	cin>>n>>m;
+	for(int i = 1;i <= n;i++){
+		for(int j = 1;j <= m;j++){
+			no[i][j][0] = ++nnt,no[i][j][1] = ++nnt;
+			CreateEdge(no[i][j][0],no[i][j][1],INF);
+		}
+	}
+	VST = ++nnt,VED = ++nnt;
+	for(int i = 1;i <= n;i++)for(int j = 1;j <= m;j++)cin>>art[i][j];
+	for(int i = 1;i <= n;i++)for(int j = 1;j <= m;j++)cin>>sci[i][j];
+	for(int i = 1;i < n;i++)for(int j = 1;j <= m;j++)cin>>art_upper[i][j];
+	for(int i = 1;i < n;i++)for(int j = 1;j <= m;j++)cin>>sci_upper[i][j];
+	for(int i = 1;i <= n;i++)for(int j = 1;j < m;j++)cin>>art_right[i][j];
+	for(int i = 1;i <= n;i++)for(int j = 1;j < m;j++)cin>>sci_right[i][j];
+	for(int i = 1;i <= n;i++){
+		for(int j = 1;j <= m;j++){
+			sum += art[i][j] + sci[i][j];
+			CreateEdge(VST,no[i][j][0],art[i][j]);
+			CreateEdge(no[i][j][1],VED,sci[i][j]);
+		}
+	}
+	for(int i = 1;i < n;i++){
+		for(int j = 1;j <= m;j++){
+			const int no_art = ++nnt;
+			sum += art_upper[i][j];
+			const int OX = i + 1,OY = j;
+			CreateEdge(VST,no_art,art_upper[i][j]);
+			CreateEdge(no_art,no[i][j][0],INF);
+			CreateEdge(no_art,no[OX][OY][0],INF);
+			
+			const int no_sci = ++nnt;
+			sum += sci_upper[i][j];
+			CreateEdge(no_sci,VED,sci_upper[i][j]);
+			CreateEdge(no[i][j][0],no_sci,INF);
+			CreateEdge(no[OX][OY][0],no_sci,INF);
+		}
+	}
+	for(int i = 1;i <= n;i++){
+		for(int j = 1;j < m;j++){
+			const int no_art = ++nnt;
+			sum += art_right[i][j];
+			const int OX = i,OY = j + 1;
+			CreateEdge(VST,no_art,art_right[i][j]);
+			CreateEdge(no_art,no[i][j][0],INF);
+			CreateEdge(no_art,no[OX][OY][0],INF);
+			
+			const int no_sci = ++nnt;
+			sum += sci_right[i][j];
+			CreateEdge(no_sci,VED,sci_right[i][j]);
+			CreateEdge(no[i][j][0],no_sci,INF);
+			CreateEdge(no[OX][OY][0],no_sci,INF);
+		}
+	}
+	ll DNC = Dinic(nnt,VST,VED);
+//	cout<<DNC<<" ? dinic"<<endl;
+	cout<<sum-DNC<<flush;
+	return 0;
+}

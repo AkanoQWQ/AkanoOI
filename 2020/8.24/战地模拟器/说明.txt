@@ -1,0 +1,62 @@
+《战地模拟器（Ravenfield）》[EN]
+
+
+
+　　　　　      ╭═══════════════╮
+　　　　　　　　║       【3DMGAME游戏网】      ║
+　╭══════┤  　http://www.3dMgame.com　  ├══════╮
+　║　　　　　　║　　http://bbs.3dmgame.com　  ║　　　　　　║
+　║　　　　　　║　　　　　　　　　　　　　　　║            ║
+　║　　　　　　╰═══════════════╯　　　　　　║
+　║　　　　　　　　　　　　　　　　　　　　　　　　　　　　　║
+　║　　　　　　　　　　　　　　　　　　　　　　　　　　　　　║
+　║ 本站提供的各类游戏，工具及文章，只可研究学习，本站对使用 ║
+　║ 这些游戏（工具）而导致的一切后果，不承担任何责任　　　　 ║
+　║　　　　　　　　　　　　　　　　　　　　　　　　　　　　　║　　 
+　║　　　　　　　　　　　　　　　　　　　　　　　　　　　　　║
+　║　　　　　　　　　　　　　　　　　　　　　　　　　　　　　║
+　║　　　　　　　　　　　　　　　　　　　　　　　　　　　　　║
+　║　　╭───────────────────────╮　　║
+　╰══┤　　  【3DMGAME网】 http://www.3dmgame.com　  ├══╯
+　　　　╰───────────────────────╯ 
+
+
+游戏名称：战地模拟器
+英文名称：Ravenfield
+游戏类型：第一人称射击类(FPS)游戏
+游戏制作：SteelRaven7
+游戏发行：SteelRaven7
+游戏平台：PC
+发售时间：2017年5月18日
+官方网站：http://store.steampowered.com/app/636480/
+
+游戏介绍
+
+  《战地模拟器（Ravenfield）》是一个独立制作组打造的一款与AI对战的单人第一人称设计游戏，游戏中你需要扮演主角与敌人战斗，击败敌人获得分数闯关一个个关卡，关卡中你可以使用各种各样的武器载具，非常有趣。
+
+配置要求
+
+最低配置:
+
+操作系统: Windows XP SP2
+处理器: 2 GHz or Faster
+内存: 4 GB RAM
+图形: Intel HD 3000
+DirectX 版本: 9.0c
+存储空间: 需要 1 GB 可用空间
+
+推荐配置:
+
+操作系统: Windows 7 or Newer
+处理器: 3 GHz or Faster
+内存: 8 GB RAM
+图形: Geforce GTX 750
+DirectX 版本: 11
+存储空间: 需要 1 GB 可用空间
+
+
+安装信息
+1. 解压缩
+2. 运行游戏
+
+已集成未加密补丁 游戏必备组件在_CommonRedist文件夹下请自行安装

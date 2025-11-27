@@ -1,0 +1,4 @@
+cuvelia		2	1000	100
+voltis		2	1000	100
+pastel		2	2000	100
+tree		4	1000	100

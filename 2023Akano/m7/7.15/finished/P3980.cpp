@@ -1,0 +1,94 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll = long long;
+const int MAXN = 1006;
+const int MAXPOP = 10006;
+const int MAXP = 22006 + 1018 + 1108;//remember to EDIT
+const int MAXM = 42006 + 1018 + 1108;//EDIT and *2
+const int INF = 0x7fffffff;
+struct Edge{
+	int nxt,to;
+	ll cap,cost;
+}e[MAXM];
+int head[MAXP],cnt = 1;
+inline void AddEdge(int from,int to,ll val,ll cost){
+	e[++cnt].to = to;
+	e[cnt].cap = val;
+	e[cnt].cost = cost;
+	e[cnt].nxt = head[from];
+	head[from] = cnt;
+	return ;
+}
+inline void CreateEdge(int from,int to,ll val,ll cost){
+	AddEdge(from,to,val,cost),AddEdge(to,from,0,-cost);
+	return ;
+}
+namespace MCMF{
+	bool inq[MAXP];
+	ll dis[MAXP],nowf[MAXP];
+	int pre[MAXP];
+	inline bool SPFA(int n,int ST,int ED){
+		queue<int> q;
+		for(int i = 0;i <= n;i++){
+			dis[i] = INF;
+			nowf[i] = 0;
+		}
+		q.push(ST);
+		dis[ST] = 0,nowf[ST] = INF,inq[ST] = true;
+		while(!q.empty()){
+			const int u = q.front();
+			q.pop();
+			inq[u] = false;
+			for(int i = head[u];i;i = e[i].nxt){
+				if(e[i].cap <= 0)continue;
+				const int v = e[i].to;
+				if(dis[v] > dis[u] + e[i].cost){
+					dis[v] = dis[u] + e[i].cost;
+					if(!inq[v]){
+						q.push(v),inq[v] = true;
+					}
+					pre[v] = i,nowf[v] = min(nowf[u],e[i].cap);
+ 				}
+			}
+		}
+		return (dis[ED] != INF);
+	}
+	inline pair<ll,ll> MCMF(int n,int ST,int ED){
+		ll minCost = 0,maxFlow = 0;
+		while(SPFA(n,ST,ED)){
+			ll pos = ED,cost = 0;
+			while(pos != ST){
+				cost += e[pre[pos]].cost;
+				e[pre[pos]].cap -= nowf[ED],e[pre[pos]^1].cap += nowf[ED];
+				pos = e[pre[pos]^1].to;
+			}
+			minCost += cost * nowf[ED],maxFlow += nowf[ED];
+		}
+		return make_pair(maxFlow,minCost);
+	}
+}
+int n,m,VST,VED,nnt,no[MAXN],pop[MAXPOP];
+ll query[MAXN];
+int main(){
+	ios::sync_with_stdio(false),cin.tie(0),cout.tie(0);
+	freopen("P3980.in","r",stdin);
+	cin>>n>>m;
+	VST = ++nnt,VED = ++nnt;
+	for(int i = 1;i <= n;i++){
+		cin>>query[i];
+		no[i] = ++nnt;
+	}
+	no[n+1] = ++nnt;
+	CreateEdge(VST,no[1],INF,0);
+	for(int i = 1;i <= n;i++){
+		CreateEdge(no[i],no[i+1],INF - query[i],0);
+	}
+	CreateEdge(no[n+1],VED,INF,0);
+	for(int i = 1;i <= m;i++){
+		int l,r,c;
+		cin>>l>>r>>c;
+		CreateEdge(no[l],no[r+1],INF,c);
+	}
+	cout<<MCMF::MCMF(nnt,VST,VED).second<<endl;
+	return 0;
+}

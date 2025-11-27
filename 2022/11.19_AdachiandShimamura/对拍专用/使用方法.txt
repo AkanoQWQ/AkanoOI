@@ -1,0 +1,1 @@
+复制该文件夹到本地，在文件夹内放入你的程序并命名为card.exe（需要开启freopen），打开IFjudge，输入card，换行，按y

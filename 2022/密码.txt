@@ -1,0 +1,3 @@
+belief2022
+-Wall -Wextra -Wconversion -Wshadow
+-Wall -Wextra -Wconversion -Wshadow -O2 -std=c++14
